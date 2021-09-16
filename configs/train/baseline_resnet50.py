@@ -47,7 +47,7 @@ std = [0.229, 0.224, 0.225]
 
 train_transforms = A.Compose(
     [
-        A.Resize(224),
+        A.Resize(224,224),
         A.Normalize(mean=mean, std=std),
         ToTensor(),
     ]
@@ -55,7 +55,7 @@ train_transforms = A.Compose(
 
 val_transforms = A.Compose(
     [
-        A.Resize(224),
+        A.Resize(224,224),
         A.Normalize(mean=mean, std=std),
         ToTensor(),
     ]
