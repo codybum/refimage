@@ -1,10 +1,12 @@
+import os
 from typing import Callable, Optional, Tuple
 
 import cv2
 import numpy as np
 from torch.utils.data import DataLoader
 from torch.utils.data.dataset import Subset
-from torchvision.datasets import ImageNet
+from torchvision import datasets
+#from torchvision.datasets import ImageNet
 
 import ignite.distributed as idist
 
@@ -26,12 +28,15 @@ def get_train_val_loaders(
     limit_val_num_samples: Optional[int] = None,
 ) -> Tuple[DataLoader, DataLoader, DataLoader]:
 
-    train_ds = ImageNet(
-        root_path, split="train", transform=lambda sample: train_transforms(image=sample)["image"], loader=opencv_loader
-    )
-    val_ds = ImageNet(
-        root_path, split="val", transform=lambda sample: val_transforms(image=sample)["image"], loader=opencv_loader
-    )
+    #train_ds = ImageNet(
+    #    root_path, split="train", transform=lambda sample: train_transforms(image=sample)["image"], loader=opencv_loader
+    #)
+    #val_ds = ImageNet(
+    #    root_path, split="val", transform=lambda sample: val_transforms(image=sample)["image"], loader=opencv_loader
+    #)
+
+    train_ds = datasets.ImageFolder(os.path.join(root_path, 'train'), train_transforms)
+    val_ds = datasets.ImageFolder(os.path.join(root_path, 'val'), val_transforms)
 
     if limit_train_num_samples is not None:
         np.random.seed(limit_train_num_samples)

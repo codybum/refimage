@@ -7,14 +7,14 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.optim.lr_scheduler as lrs
 from albumentations.pytorch import ToTensorV2 as ToTensor
+from dataflow.dataloaders import get_train_val_loaders
 from dataflow.transforms import denormalize
 from torchvision import datasets
 from torchvision.models.resnet import resnet50
 
 import ignite.distributed as idist
 
-from configs.train.image_dataloader import get_train_val_loaders
-
+from configs.train.image_dataloader import
 
 def get_train_test_datasets(path, train_transforms, val_transform):
 
